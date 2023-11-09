@@ -713,32 +713,124 @@ int aggressiveCows(vector<int> &stalls, int k)
 }
 
 bool isCooking(vector<int> &rank, int m, int mid){
-    int dishCount = 1;
-    
+    int time = 0;
+    int dishCount = 0;
+    for (int i=0; i<rank.size(); i++){
+        time = rank[i];
+        int j = 2;
+        while (time<=mid){
+            dishCount++;
+            time = time + (rank[i]*j);
+            j++;
+        }
+        if (dishCount>=m) return true;
+    }
+    return false;
 }
 
 int minCookTime(vector<int> &rank, int m) {
     int start = 0;
-    int end = 1e8;
+    int mini = *min_element(rank.begin(), rank.end());
+    int end = m*(m+1)*(mini)/2;
     int ans = 0;
+    int mid = start + (end-start)/2;
     while (start <= end){
-        int mid = start + (end-start)/2;
         if (isCooking(rank, m, mid)){
             ans = mid;
-            end = start-1;
+            end = mid-1;
         } 
         else {
-            start = end+1;
+            start = mid+1;
         }
         mid = start + (end-start)/2;
     }
     return ans;
 }
 
+int cutHeight(vector<int> tree, int m, int mid){
+    int wood = 0;
+    for (int i=0; i<tree.size(); i++){
+        if (tree[i] > mid){
+            wood = wood + (tree[i]-mid);
+        }
+    }
+    return wood;
+}
+
+int lumberjack(vector<int> &tree, int m){
+    int start = 0;
+    int end = *max_element(tree.begin(), tree.end());
+    while (start <= end){
+        int mid = start + (end-start)/2;
+        int wood = cutHeight(tree, m, mid);
+        if (wood == m){
+            return mid;
+        } else if (wood > m){
+            start = mid+1;
+        } else if (wood < m){
+            end = mid-1;
+        }
+    }
+    return -1;
+}
+
+int minOfArr(int array[], int l, int r){
+    int min = INT_MAX;
+    for (int i=l; i<=r; i++){
+        if(array[i]<min){
+            min = array[i];
+        }
+    }
+    return min;
+}
+
+int selectionSort(int arr[], int n){
+    for(int i=0; i<n-1; i++){
+        int min = minOfArr(arr, i, n-1);
+        int mini = 0;
+        for (int j=0; j<n; j++){
+            if (arr[j] == min){
+                mini = j;
+            }
+        }
+        swap(arr[i], arr[mini]);
+    }
+}
+
+void selectionSortOpt(int arr[], int n){
+    for (int i=0; i<n-1; i++){
+        int minIndex = i;
+        for (int j=i+1; j<n; j++){
+            if (arr[j] < arr[minIndex]){
+                minIndex = j;
+            }
+        }
+        swap(arr[minIndex], arr[i]);
+    }
+}
+
+void insertionSort(int n, vector<int> &arr){
+    int i = 1;
+    while (i < n){
+        int temp = arr[i];
+        int j = i-1;
+        while (j >= 0) {
+            if (arr[j] > temp){
+                arr[j+1] = arr[j];
+            } else {
+                break;
+            }
+            j--;
+        }
+        arr[j+1] = temp;
+        i++;
+    }
+}
+
 int main() {
-    vector<int> arr = {56, 75, 89, 20, 99};
-    int num = minCookTime(arr, 58);
-    cout<<num<<endl;
+    vector<int> arr = {4, 42, 40, 26, 46, 1};
+    insertionSort(6, arr);
+    printVector(arr);
 }
 
 
