@@ -2,6 +2,7 @@
 using namespace std;
 
 
+// STL: Algorithms
 int main() {
     vector<int> v;
 
@@ -15,6 +16,58 @@ int main() {
 
     cout<<lower_bound(v.begin(), v.end(), 13)-v.begin()<<endl;
     cout<<upper_bound(v.begin(), v.end(), 13)-v.begin()<<endl;
+
+    cout<<"GCD => "<<__gcd(10, 6)<<endl;
+    cout<<"LCM => "<<(10*6)/__gcd(10, 6)<<endl;
+
+    int a = 10;
+    int b = 6;
+
+    cout<<max(a, b)<<endl;
+    cout<<min(a, b)<<endl;
+
+    cout<<pow(2, 5)<<endl;
+
+    cout<<"Before swap: "<<a<<" "<<b<<endl;
+
+    swap(a, b);
+
+    cout<<"After swap: "<<a<<" "<<b<<endl;
+
+    string s = "abc";
+    cout<<s<<endl;
+
+    reverse(s.begin(), s.end());
+
+    cout<<s<<endl;
+
+    cout<<"Before rotate: "<<endl;
+    for (int i:v) {
+        cout<<i<<" ";
+    }
+    cout<<endl;
+
+    rotate(v.begin(), v.begin()+2, v.end());
+
+    cout<<"After rotate: "<<endl;
+    for (int i:v) {
+        cout<<i<<" ";
+    }
+    cout<<endl<<endl;
+
+    cout<<"Before sort: "<<endl;
+    for (int i:v) {
+        cout<<i<<" ";
+    }
+    cout<<endl;
+
+    sort(v.begin(), v.end());
+
+    cout<<"After sort: "<<endl;
+    for (int i:v) {
+        cout<<i<<" ";
+    }
+    cout<<endl;
 }
 
 
