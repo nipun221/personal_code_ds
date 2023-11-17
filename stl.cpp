@@ -3,6 +3,67 @@ using namespace std;
 
 
 int main() {
+    vector<int> v;
+
+    v.push_back(1);
+    v.push_back(5);
+    v.push_back(13);
+    v.push_back(17);
+    v.push_back(21);
+
+    cout<<binary_search(v.begin(), v.end(), 21)<<endl;
+
+    cout<<lower_bound(v.begin(), v.end(), 13)-v.begin()<<endl;
+    cout<<upper_bound(v.begin(), v.end(), 13)-v.begin()<<endl;
+}
+
+
+
+
+// STL: Map
+/*
+int main() {
+    map<int, string> m;
+
+    m[1] = "John";
+    m[10] = "Tim";
+    m[2] = "Bob";
+    m[3] = "Alice";
+    m.insert({4, "Harry"});
+
+    for (auto i:m) {
+        cout<<i.first<<" "<<i.second<<endl;
+    }
+
+    cout<<"Find element: "<<m.count(5)<<endl;
+
+    cout<<"Before erase: "<<endl;
+    for (auto i:m) {
+        cout<<i.first<<" "<<i.second<<endl;
+    }
+    
+    m.erase(2);
+
+    cout<<"After erase: "<<endl;
+
+    for (auto i:m) {
+        cout<<i.first<<" "<<i.second<<endl;
+    }
+
+    auto itr = m.find(1);
+    cout<<"Element found: "<<itr->second<<endl;
+
+    for (auto it=itr; it!=m.end(); it++) {
+        cout<<it->first<<" "<<it->second<<endl;
+    }
+}
+*/
+
+
+
+// STL: Set
+/*
+int main() {
     set<int> s;
 
     s.insert(5);
@@ -34,7 +95,7 @@ int main() {
     cout<<"Element found: "<<*it<<endl;
 
 }
-
+*/
 
 
 // STL: Priority Queue
