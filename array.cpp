@@ -827,10 +827,78 @@ void insertionSort(int n, vector<int> &arr){
     }
 }
 
+void reverseArray(vector<int> &arr , int m) {
+    int mid = (m+arr.size()+1)/2;
+	for (int i=m+1; i<mid; i++){
+        swap(arr[i], arr[arr.size()-i+m]);
+    }
+}
+
+vector <int> sortedArray(vector <int> a, vector <int> b) {
+    vector <int> ans;
+    vector<int>::iterator ip;
+    for (int i=0; i<a.size(); i++) {
+        ans.push_back(a[i]);
+    }
+    for (int i=0; i<b.size(); i++) {
+        ans.push_back(b[i]);   
+    }
+    sort(ans.begin(), ans.end());
+    int n = ans.size();
+    ip = unique(ans.begin(), ans.begin()+n);
+    ans.resize(distance(ans.begin(), ip));
+    return ans;
+}
+
+vector<int> ninjaAndSortedArrays(vector<int>& arr1, vector<int>& arr2, int m, int n) {
+    vector<int> sum;
+	int i = 0, j = 0;
+    while(i<m) {
+        sum.push_back(arr1[i]);
+        i++;
+    }
+    while(j<n) {
+        sum.push_back(arr2[j]);
+        j++;
+    }
+    sort(sum.begin(), sum.end());
+    return sum;
+}
+
+vector<int> moveZeros(int n, vector<int> a) {
+    vector<int> ans;
+    for (int i=0; i<a.size(); i++) {
+        if (a[i] != 0) {
+            ans.push_back(a[i]);
+        }
+    }
+    int size = a.size()-ans.size();
+    for (int j=0; j<size; j++) {
+        ans.push_back(0);
+    }
+    printVector(ans);
+}
+
 int main() {
     vector<int> arr = {4, 42, 40, 26, 46, 1};
     insertionSort(6, arr);
     printVector(arr);
+    cout<<endl;
+    reverseArray(arr, 2);
+    printVector(arr);
+    cout<<endl;
+
+    vector <int> a = {3, 3, 4, 5, 6, 7, 8, 9, 9, 9 };
+    vector <int> b = {2, 4, 10, 10 };
+    sortedArray(a, b);
+
+    vector <int> v1 = {1, 2, 3, 0, 0};
+    vector <int> v2 = {4, 5};
+    ninjaAndSortedArrays(v1, v2, 3, 2);
+    cout<<endl;
+
+    vector <int> v3 = {0, 1, 2, 0, 3, 4, 0};
+    moveZeros(5, v3);
 }
 
 
